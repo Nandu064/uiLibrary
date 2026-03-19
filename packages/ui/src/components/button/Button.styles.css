@@ -1,0 +1,164 @@
+.ui-button {
+  /* Component tokens */
+  --btn-bg: var(--ui-primary);
+  --btn-fg: var(--ui-fg-on-primary);
+  --btn-border: transparent;
+  --btn-bg-hover: var(--ui-primary-hover);
+  --btn-bg-active: var(--ui-primary-active);
+  --btn-radius: var(--ui-radius-md);
+  --btn-font-weight: 500;
+  --btn-shadow: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1.5px solid var(--btn-border);
+  border-radius: var(--btn-radius);
+  background-color: var(--btn-bg);
+  color: var(--btn-fg);
+  font-weight: var(--btn-font-weight);
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--ui-duration-fast) var(--ui-ease),
+    border-color var(--ui-duration-fast) var(--ui-ease),
+    color var(--ui-duration-fast) var(--ui-ease),
+    box-shadow var(--ui-duration-fast) var(--ui-ease),
+    opacity var(--ui-duration-fast) var(--ui-ease);
+  box-shadow: var(--btn-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.ui-button:hover:not(:disabled) {
+  background-color: var(--btn-bg-hover);
+}
+
+.ui-button:active:not(:disabled) {
+  background-color: var(--btn-bg-active);
+}
+
+.ui-button:focus-visible {
+  outline: var(--ui-focus-ring-width) solid var(--ui-focus-ring);
+  outline-offset: var(--ui-focus-ring-offset);
+}
+
+.ui-button:disabled,
+.ui-button[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* === Sizes === */
+.ui-button[data-size="sm"] {
+  padding: 6px 12px;
+  font-size: var(--ui-text-sm);
+  height: 32px;
+}
+
+.ui-button[data-size="md"] {
+  padding: 8px 16px;
+  font-size: var(--ui-text-sm);
+  height: 40px;
+}
+
+.ui-button[data-size="lg"] {
+  padding: 10px 20px;
+  font-size: var(--ui-text-md);
+  height: 48px;
+}
+
+/* === Variants: solid (default) === */
+.ui-button[data-variant="solid"][data-color="primary"] {
+  --btn-bg: var(--ui-primary);
+  --btn-fg: var(--ui-fg-on-primary);
+  --btn-bg-hover: var(--ui-primary-hover);
+  --btn-bg-active: var(--ui-primary-active);
+}
+
+.ui-button[data-variant="solid"][data-color="danger"] {
+  --btn-bg: var(--ui-danger);
+  --btn-fg: var(--ui-fg-on-primary);
+  --btn-bg-hover: var(--ui-danger-hover);
+  --btn-bg-active: var(--ui-danger-hover);
+}
+
+/* === Variants: outline === */
+.ui-button[data-variant="outline"] {
+  --btn-bg: transparent;
+  --btn-fg: var(--ui-primary);
+  --btn-border: var(--ui-primary);
+  --btn-bg-hover: var(--ui-primary-subtle);
+  --btn-bg-active: var(--ui-primary-muted);
+}
+
+.ui-button[data-variant="outline"][data-color="danger"] {
+  --btn-fg: var(--ui-danger);
+  --btn-border: var(--ui-danger);
+  --btn-bg-hover: var(--ui-danger-subtle);
+  --btn-bg-active: var(--ui-danger-muted);
+}
+
+/* === Variants: ghost === */
+.ui-button[data-variant="ghost"] {
+  --btn-bg: transparent;
+  --btn-fg: var(--ui-fg);
+  --btn-border: transparent;
+  --btn-bg-hover: var(--ui-bg-muted);
+  --btn-bg-active: var(--ui-border);
+}
+
+.ui-button[data-variant="ghost"][data-color="primary"] {
+  --btn-fg: var(--ui-primary);
+  --btn-bg-hover: var(--ui-primary-subtle);
+}
+
+.ui-button[data-variant="ghost"][data-color="danger"] {
+  --btn-fg: var(--ui-danger);
+  --btn-bg-hover: var(--ui-danger-subtle);
+}
+
+/* === Variants: link === */
+.ui-button[data-variant="link"] {
+  --btn-bg: transparent;
+  --btn-fg: var(--ui-primary);
+  --btn-border: transparent;
+  --btn-bg-hover: transparent;
+  --btn-bg-active: transparent;
+  height: auto;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* === Full width === */
+.ui-button[data-full-width="true"] {
+  width: 100%;
+}
+
+/* === Loading === */
+.ui-button[data-loading="true"] {
+  cursor: wait;
+  pointer-events: none;
+}
+
+.ui-button__spinner {
+  animation: ui-spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes ui-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.ui-button__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}

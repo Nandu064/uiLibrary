@@ -1,0 +1,18 @@
+.ui-label {
+  display: inline-block;
+  font-size: var(--ui-text-sm);
+  font-weight: var(--ui-font-medium);
+  color: var(--ui-fg);
+  line-height: 1.4;
+  cursor: default;
+}
+
+.ui-label--disabled,
+.ui-label[data-disabled] {
+  color: var(--ui-fg-muted);
+  cursor: not-allowed;
+}
+
+.ui-label__required {
+  color: var(--ui-danger);
+}

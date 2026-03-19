@@ -1,0 +1,5 @@
+{
+  "extends": "@harish-ui/config-typescript/react-library.json",
+  "include": [".storybook", "../../packages/ui/src"],
+  "exclude": ["node_modules"]
+}

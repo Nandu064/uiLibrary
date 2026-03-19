@@ -1,0 +1,21 @@
+.ui-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ui-spinner__svg {
+  animation: ui-spin 0.65s linear infinite;
+}
+
+.ui-spinner[data-size="xs"] .ui-spinner__svg { width: 12px; height: 12px; }
+.ui-spinner[data-size="sm"] .ui-spinner__svg { width: 16px; height: 16px; }
+.ui-spinner[data-size="md"] .ui-spinner__svg { width: 24px; height: 24px; }
+.ui-spinner[data-size="lg"] .ui-spinner__svg { width: 32px; height: 32px; }
+.ui-spinner[data-size="xl"] .ui-spinner__svg { width: 48px; height: 48px; }
+
+@keyframes ui-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,36 @@
+.ui-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ui-radius-full);
+  font-weight: var(--ui-font-medium);
+  line-height: 1;
+  white-space: nowrap;
+  border: 1.5px solid transparent;
+}
+
+/* Sizes */
+.ui-badge[data-size="sm"] { padding: 2px 6px; font-size: 11px; }
+.ui-badge[data-size="md"] { padding: 3px 8px; font-size: var(--ui-text-xs); }
+.ui-badge[data-size="lg"] { padding: 4px 10px; font-size: var(--ui-text-sm); }
+
+/* Solid variant */
+.ui-badge[data-variant="solid"][data-color="primary"] { background: var(--ui-primary); color: var(--ui-fg-on-primary); }
+.ui-badge[data-variant="solid"][data-color="success"] { background: var(--ui-success); color: var(--ui-fg-on-primary); }
+.ui-badge[data-variant="solid"][data-color="warning"] { background: var(--ui-warning); color: var(--ui-fg-on-primary); }
+.ui-badge[data-variant="solid"][data-color="danger"] { background: var(--ui-danger); color: var(--ui-fg-on-primary); }
+.ui-badge[data-variant="solid"][data-color="neutral"] { background: var(--ui-fg-subtle); color: var(--ui-fg-on-primary); }
+
+/* Subtle variant */
+.ui-badge[data-variant="subtle"][data-color="primary"] { background: var(--ui-primary-muted); color: var(--ui-primary); }
+.ui-badge[data-variant="subtle"][data-color="success"] { background: var(--ui-success-muted); color: var(--ui-success); }
+.ui-badge[data-variant="subtle"][data-color="warning"] { background: var(--ui-warning-muted); color: var(--ui-warning); }
+.ui-badge[data-variant="subtle"][data-color="danger"] { background: var(--ui-danger-muted); color: var(--ui-danger); }
+.ui-badge[data-variant="subtle"][data-color="neutral"] { background: var(--ui-bg-muted); color: var(--ui-fg-subtle); }
+
+/* Outline variant */
+.ui-badge[data-variant="outline"][data-color="primary"] { color: var(--ui-primary); border-color: var(--ui-primary); }
+.ui-badge[data-variant="outline"][data-color="success"] { color: var(--ui-success); border-color: var(--ui-success); }
+.ui-badge[data-variant="outline"][data-color="warning"] { color: var(--ui-warning); border-color: var(--ui-warning); }
+.ui-badge[data-variant="outline"][data-color="danger"] { color: var(--ui-danger); border-color: var(--ui-danger); }
+.ui-badge[data-variant="outline"][data-color="neutral"] { color: var(--ui-fg-subtle); border-color: var(--ui-border-strong); }

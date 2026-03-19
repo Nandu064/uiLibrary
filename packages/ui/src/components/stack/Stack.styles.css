@@ -1,0 +1,12 @@
+.ui-stack {
+  display: flex;
+}
+
+.ui-stack[data-direction="row"] { flex-direction: row; }
+.ui-stack[data-direction="column"] { flex-direction: column; }
+.ui-stack[data-direction="row-reverse"] { flex-direction: row-reverse; }
+.ui-stack[data-direction="column-reverse"] { flex-direction: column-reverse; }
+
+.ui-stack[data-wrap="wrap"] { flex-wrap: wrap; }
+.ui-stack[data-wrap="nowrap"] { flex-wrap: nowrap; }
+.ui-stack[data-wrap="wrap-reverse"] { flex-wrap: wrap-reverse; }

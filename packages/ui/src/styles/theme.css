@@ -1,0 +1,112 @@
+/*
+ * CSS Variables — Design tokens for @harish-ui/core
+ * Light theme (default) and dark theme via [data-theme="dark"]
+ */
+
+:root {
+  /* Backgrounds */
+  --ui-bg: #ffffff;
+  --ui-bg-subtle: #fafafa;
+  --ui-bg-muted: #f5f5f5;
+
+  /* Foregrounds */
+  --ui-fg: #0f172a;
+  --ui-fg-subtle: #475569;
+  --ui-fg-muted: #94a3b8;
+  --ui-fg-on-primary: #ffffff;
+
+  /* Border */
+  --ui-border: #e2e8f0;
+  --ui-border-strong: #cbd5e1;
+
+  /* Primary (brand blue) */
+  --ui-primary: #2563eb;
+  --ui-primary-hover: #1d4ed8;
+  --ui-primary-active: #1e40af;
+  --ui-primary-subtle: #eff6ff;
+  --ui-primary-muted: #dbeafe;
+
+  /* Danger */
+  --ui-danger: #dc2626;
+  --ui-danger-hover: #b91c1c;
+  --ui-danger-subtle: #fef2f2;
+  --ui-danger-muted: #fee2e2;
+
+  /* Success */
+  --ui-success: #16a34a;
+  --ui-success-subtle: #f0fdf4;
+  --ui-success-muted: #dcfce7;
+
+  /* Warning */
+  --ui-warning: #ca8a04;
+  --ui-warning-subtle: #fefce8;
+  --ui-warning-muted: #fef9c3;
+
+  /* Focus ring */
+  --ui-focus-ring: #3b82f6;
+  --ui-focus-ring-offset: 2px;
+  --ui-focus-ring-width: 2px;
+
+  /* Overlay */
+  --ui-overlay-bg: rgba(0, 0, 0, 0.5);
+
+  /* Radii */
+  --ui-radius-sm: 4px;
+  --ui-radius-md: 8px;
+  --ui-radius-lg: 12px;
+  --ui-radius-xl: 16px;
+  --ui-radius-full: 9999px;
+
+  /* Shadows */
+  --ui-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --ui-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --ui-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* Motion */
+  --ui-duration-fast: 100ms;
+  --ui-duration-normal: 200ms;
+  --ui-duration-slow: 300ms;
+  --ui-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Z-index */
+  --ui-z-modal: 1000;
+  --ui-z-tooltip: 1100;
+  --ui-z-toast: 1200;
+  --ui-z-dropdown: 200;
+}
+
+[data-theme="dark"] {
+  --ui-bg: #0a0a0a;
+  --ui-bg-subtle: #171717;
+  --ui-bg-muted: #262626;
+
+  --ui-fg: #fafafa;
+  --ui-fg-subtle: #94a3b8;
+  --ui-fg-muted: #64748b;
+  --ui-fg-on-primary: #ffffff;
+
+  --ui-border: #334155;
+  --ui-border-strong: #475569;
+
+  --ui-primary: #60a5fa;
+  --ui-primary-hover: #93c5fd;
+  --ui-primary-active: #bfdbfe;
+  --ui-primary-subtle: #1e3a8a;
+  --ui-primary-muted: #1e40af;
+
+  --ui-danger: #f87171;
+  --ui-danger-hover: #fca5a5;
+  --ui-danger-subtle: #7f1d1d;
+  --ui-danger-muted: #991b1b;
+
+  --ui-success: #4ade80;
+  --ui-success-subtle: #14532d;
+  --ui-success-muted: #166534;
+
+  --ui-warning: #facc15;
+  --ui-warning-subtle: #713f12;
+  --ui-warning-muted: #854d0e;
+
+  --ui-overlay-bg: rgba(0, 0, 0, 0.7);
+  --ui-focus-ring: #60a5fa;
+}

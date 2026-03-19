@@ -1,0 +1,73 @@
+# Theming
+
+Harish UI uses CSS custom properties (variables) for theming. This means you can customize the look of every component by overriding CSS variables — no special setup, no JavaScript configuration.
+
+## How it works
+
+When you import `@harish-ui/core/styles.css`, it sets up a three-layer token system:
+
+1. **Primitive tokens** — raw values: colors, spacing, radii
+2. **Semantic tokens** — `--ui-primary`, `--ui-danger`, `--ui-bg`
+3. **Component tokens** — `--btn-bg`, `--input-border-focus`
+
+Components use semantic tokens. You only need to override those.
+
+## Override the theme
+
+```css
+/* your-app.css */
+:root {
+  --ui-primary: #7c3aed;         /* purple instead of blue */
+  --ui-primary-hover: #6d28d9;
+  --ui-primary-active: #5b21b6;
+  --ui-primary-subtle: #f5f3ff;
+  --ui-primary-muted: #ede9fe;
+  --ui-radius-md: 4px;           /* sharper corners */
+}
+```
+
+## Available tokens
+
+### Color tokens
+
+| Token | Light default | Description |
+|---|---|---|
+| `--ui-bg` | `#ffffff` | Page background |
+| `--ui-bg-subtle` | `#fafafa` | Subtle background |
+| `--ui-fg` | `#0f172a` | Primary foreground text |
+| `--ui-primary` | `#2563eb` | Brand color |
+| `--ui-danger` | `#dc2626` | Destructive actions |
+| `--ui-success` | `#16a34a` | Positive states |
+| `--ui-border` | `#e2e8f0` | Default border |
+
+### Shape tokens
+
+| Token | Default | Description |
+|---|---|---|
+| `--ui-radius-sm` | `4px` | Small radius |
+| `--ui-radius-md` | `8px` | Default radius |
+| `--ui-radius-lg` | `12px` | Large radius |
+| `--ui-radius-full` | `9999px` | Pill shape |
+
+## ThemeProvider
+
+Use `ThemeProvider` to manage theme state and switching:
+
+```tsx
+<ThemeProvider defaultTheme="system">
+  <App />
+</ThemeProvider>
+```
+
+```tsx
+import { useTheme } from "@harish-ui/core";
+
+function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme();
+  return (
+    <button onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}>
+      Toggle theme
+    </button>
+  );
+}
+```

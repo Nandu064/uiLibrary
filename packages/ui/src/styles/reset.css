@@ -1,0 +1,19 @@
+/*
+ * Minimal CSS reset for @harish-ui/core components.
+ * Scoped to .ui-* selectors to avoid affecting consumer apps.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.ui-button,
+.ui-input,
+.ui-textarea,
+.ui-select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}

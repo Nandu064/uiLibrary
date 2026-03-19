@@ -1,0 +1,61 @@
+# Installation
+
+## Requirements
+
+- React 18 or 19
+- Node.js 18+
+
+## Install the package
+
+```bash
+npm install @harish-ui/core
+# or
+pnpm add @harish-ui/core
+# or
+yarn add @harish-ui/core
+```
+
+## Import styles
+
+Add the styles import once, near the top of your app entry point:
+
+```ts
+import "@harish-ui/core/styles.css";
+```
+
+In Next.js, add this to your root `layout.tsx`:
+
+```tsx
+// app/layout.tsx
+import "@harish-ui/core/styles.css";
+```
+
+## Wrap with ThemeProvider
+
+Optionally wrap your app with `ThemeProvider` for system-aware dark mode:
+
+```tsx
+import { ThemeProvider } from "@harish-ui/core";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <ThemeProvider defaultTheme="system">
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+## You're ready
+
+```tsx
+import { Button } from "@harish-ui/core";
+
+export default function App() {
+  return <Button>Hello world</Button>;
+}
+```

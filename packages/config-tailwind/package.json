@@ -1,0 +1,11 @@
+{
+  "name": "@harish-ui/config-tailwind",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "tailwind.config.ts",
+  "files": ["tailwind.config.ts"],
+  "dependencies": {
+    "tailwindcss": "^4.1.7"
+  }
+}
