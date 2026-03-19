@@ -1,0 +1,24 @@
+.ui-skeleton {
+  background-color: var(--ui-bg-muted);
+  border-radius: var(--ui-radius-md);
+  animation: ui-skeleton-pulse 1.5s ease-in-out infinite;
+  display: block;
+}
+
+.ui-skeleton[data-variant="text"] {
+  height: 1em;
+  border-radius: var(--ui-radius-sm);
+}
+
+.ui-skeleton[data-variant="circular"] {
+  border-radius: 50%;
+}
+
+.ui-skeleton[data-variant="rectangular"] {
+  border-radius: 0;
+}
+
+@keyframes ui-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

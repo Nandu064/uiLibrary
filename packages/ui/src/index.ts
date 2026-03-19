@@ -15,6 +15,12 @@ export type { TextareaProps } from "./components/textarea";
 export { Label } from "./components/label";
 export type { LabelProps } from "./components/label";
 
+export { Checkbox } from "./components/checkbox";
+export type { CheckboxProps } from "./components/checkbox";
+
+export { Switch } from "./components/switch";
+export type { SwitchProps, SwitchSize } from "./components/switch";
+
 // Components — Data Display
 export { Badge } from "./components/badge";
 export type { BadgeProps, BadgeVariant, BadgeColorScheme, BadgeSize } from "./components/badge";
@@ -32,6 +38,15 @@ export type { DividerProps } from "./components/divider";
 // Components — Feedback
 export { Spinner } from "./components/spinner";
 export type { SpinnerProps, SpinnerSize } from "./components/spinner";
+
+export { Alert } from "./components/alert";
+export type { AlertProps, AlertStatus, AlertVariant } from "./components/alert";
+
+export { Progress } from "./components/progress";
+export type { ProgressProps, ProgressSize, ProgressColor } from "./components/progress";
+
+export { Skeleton } from "./components/skeleton";
+export type { SkeletonProps, SkeletonVariant } from "./components/skeleton";
 
 // Internal docs metadata (for docs site registry)
 export { buttonDocs } from "./components/button";

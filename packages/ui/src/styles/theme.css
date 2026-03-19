@@ -42,6 +42,20 @@
   --ui-warning-subtle: #fefce8;
   --ui-warning-muted: #fef9c3;
 
+  /* Info */
+  --ui-info: #0284c7;
+  --ui-info-subtle: #f0f9ff;
+  --ui-info-muted: #e0f2fe;
+
+  /* Typography */
+  --ui-text-xs: 11px;
+  --ui-text-sm: 13px;
+  --ui-text-md: 15px;
+  --ui-text-lg: 18px;
+  --ui-text-xl: 20px;
+  --ui-font-sans: system-ui, -apple-system, sans-serif;
+  --ui-line-height: 1.5;
+
   /* Focus ring */
   --ui-focus-ring: #3b82f6;
   --ui-focus-ring-offset: 2px;
@@ -106,6 +120,10 @@
   --ui-warning: #facc15;
   --ui-warning-subtle: #713f12;
   --ui-warning-muted: #854d0e;
+
+  --ui-info: #38bdf8;
+  --ui-info-subtle: #0c4a6e;
+  --ui-info-muted: #075985;
 
   --ui-overlay-bg: rgba(0, 0, 0, 0.7);
   --ui-focus-ring: #60a5fa;

@@ -136,6 +136,25 @@
   text-underline-offset: 2px;
 }
 
+/* link + size: only font-size applies, no padding/height */
+.ui-button[data-variant="link"][data-size="sm"] {
+  font-size: var(--ui-text-sm);
+  height: auto;
+  padding: 0;
+}
+
+.ui-button[data-variant="link"][data-size="md"] {
+  font-size: var(--ui-text-sm);
+  height: auto;
+  padding: 0;
+}
+
+.ui-button[data-variant="link"][data-size="lg"] {
+  font-size: var(--ui-text-md);
+  height: auto;
+  padding: 0;
+}
+
 /* === Full width === */
 .ui-button[data-full-width="true"] {
   width: 100%;

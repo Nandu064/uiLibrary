@@ -5,19 +5,21 @@ export type SpinnerSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 export interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {
   size?: SpinnerSize;
-  /** Screen-reader accessible label */
+  /** Accessible label (always announced to screen readers) */
   label?: string;
+  /** Show the label visually below the spinner */
+  showLabel?: boolean;
   color?: string;
 }
 
 export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
-  ({ className, size = "md", label = "Loading...", color, style, ...props }, ref) => (
+  ({ className, size = "md", label = "Loading...", showLabel = false, color, style, ...props }, ref) => (
     <span
       ref={ref}
       className={cn("ui-spinner", className)}
       data-size={size}
       role="status"
-      aria-label={label}
+      aria-label={!showLabel ? label : undefined}
       {...props}
     >
       <svg
@@ -30,6 +32,11 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
         <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2.5" strokeOpacity="0.25" />
         <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
       </svg>
+      {showLabel ? (
+        <span className="ui-spinner__label" aria-live="polite">{label}</span>
+      ) : (
+        <span className="ui-sr-only">{label}</span>
+      )}
     </span>
   )
 );
