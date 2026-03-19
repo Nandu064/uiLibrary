@@ -150,9 +150,9 @@ importers:
 
   packages/hooks:
     dependencies:
-      react:
-        specifier: '>=18'
-        version: 19.2.4
+      '@harish-ui/utils':
+        specifier: workspace:*
+        version: link:../utils
       react-dom:
         specifier: '>=18'
         version: 19.2.4(react@19.2.4)
@@ -166,6 +166,9 @@ importers:
       '@types/react-dom':
         specifier: ^19.1.5
         version: 19.2.3(@types/react@19.2.14)
+      react:
+        specifier: ^19.1.0
+        version: 19.2.4
       typescript:
         specifier: ^5.8.3
         version: 5.9.3
@@ -240,6 +243,12 @@ importers:
       '@harish-ui/config-typescript':
         specifier: workspace:*
         version: link:../config-typescript
+      '@types/react':
+        specifier: ^19.1.5
+        version: 19.2.14
+      react:
+        specifier: ^19.1.0
+        version: 19.2.4
       typescript:
         specifier: ^5.8.3
         version: 5.9.3
