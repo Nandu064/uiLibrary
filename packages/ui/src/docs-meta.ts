@@ -10,5 +10,10 @@ export { cardDocs } from "./components/card";
 export { stackDocs } from "./components/stack";
 export { dividerDocs } from "./components/divider";
 export { spinnerDocs } from "./components/spinner";
+export { alertDocs } from "./components/alert";
+export { checkboxDocs } from "./components/checkbox";
+export { switchDocs } from "./components/switch";
+export { progressDocs } from "./components/progress";
+export { skeletonDocs } from "./components/skeleton";
 
 export type { DocsMeta, PropDefinition, PlaygroundControl, ComponentStatus } from "./internal-docs";

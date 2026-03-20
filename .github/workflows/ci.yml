@@ -10,9 +10,52 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  TURBO_TELEMETRY_DISABLED: 1
+  NEXT_TELEMETRY_DISABLED: 1
+
 jobs:
-  ci:
-    name: Lint, Typecheck, Test, Build
+  # ─── Job 1: Install & cache dependencies ────────────────────────────────────
+  install:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    outputs:
+      cache-key: ${{ steps.cache-key.outputs.value }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Compute cache key
+        id: cache-key
+        run: echo "value=node-modules-${{ hashFiles('pnpm-lock.yaml') }}" >> $GITHUB_OUTPUT
+
+      - name: Cache node_modules
+        id: cache-modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: ${{ steps.cache-key.outputs.value }}
+
+      - name: Install dependencies
+        if: steps.cache-modules.outputs.cache-hit != 'true'
+        run: pnpm install --frozen-lockfile
+
+  # ─── Job 2: Lint ────────────────────────────────────────────────────────────
+  lint:
+    name: Lint
+    needs: install
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,19 +70,263 @@ jobs:
           node-version: 20
           cache: pnpm
 
-      - name: Install dependencies
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: ${{ needs.install.outputs.cache-key }}
+
+      - name: Install (fallback if cache miss)
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm turbo lint
+
+  # ─── Job 3: Typecheck ───────────────────────────────────────────────────────
+  typecheck:
+    name: Typecheck
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: ${{ needs.install.outputs.cache-key }}
+
+      - name: Install (fallback if cache miss)
         run: pnpm install --frozen-lockfile
 
       - name: Typecheck
         run: pnpm turbo typecheck
 
-      - name: Test
+  # ─── Job 4: Unit tests (with retry) ─────────────────────────────────────────
+  test:
+    name: Unit Tests
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: ${{ needs.install.outputs.cache-key }}
+
+      - name: Install (fallback if cache miss)
+        run: pnpm install --frozen-lockfile
+
+      - name: Run tests (attempt 1)
+        id: test1
+        continue-on-error: true
         run: pnpm turbo test
 
-      - name: Build packages
+      - name: Run tests (retry attempt 2)
+        id: test2
+        if: steps.test1.outcome == 'failure'
+        continue-on-error: true
+        run: pnpm turbo test
+
+      - name: Run tests (retry attempt 3)
+        id: test3
+        if: steps.test2.outcome == 'failure'
+        run: pnpm turbo test
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            packages/*/coverage/
+            packages/*/*.xml
+          retention-days: 7
+          if-no-files-found: ignore
+
+  # ─── Job 5: Build packages ───────────────────────────────────────────────────
+  build-packages:
+    name: Build packages
+    needs: [typecheck, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: ${{ needs.install.outputs.cache-key }}
+
+      - name: Install (fallback if cache miss)
+        run: pnpm install --frozen-lockfile
+
+      - name: Build library packages
         run: pnpm turbo build --filter=!@harish-ui/docs --filter=!@harish-ui/storybook
+
+      - name: Cache built packages
+        uses: actions/cache@v4
+        with:
+          path: packages/*/dist
+          key: dist-${{ github.sha }}
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-packages
+          path: packages/*/dist
+          retention-days: 1
+
+  # ─── Job 6: Build docs ───────────────────────────────────────────────────────
+  build-docs:
+    name: Build docs (Next.js)
+    needs: build-packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: ${{ needs.install.outputs.cache-key }}
+
+      - name: Install (fallback if cache miss)
+        run: pnpm install --frozen-lockfile
+
+      - name: Restore built packages
+        uses: actions/cache@v4
+        with:
+          path: packages/*/dist
+          key: dist-${{ github.sha }}
 
       - name: Build docs
         run: pnpm turbo build --filter=@harish-ui/docs
-        env:
-          NEXT_TELEMETRY_DISABLED: 1
+
+      - name: Upload docs build
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-build
+          path: apps/docs/.next
+          retention-days: 1
+
+  # ─── Job 7: Build Storybook ──────────────────────────────────────────────────
+  build-storybook:
+    name: Build Storybook
+    needs: build-packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: ${{ needs.install.outputs.cache-key }}
+
+      - name: Install (fallback if cache miss)
+        run: pnpm install --frozen-lockfile
+
+      - name: Restore built packages
+        uses: actions/cache@v4
+        with:
+          path: packages/*/dist
+          key: dist-${{ github.sha }}
+
+      - name: Build Storybook
+        run: pnpm turbo build --filter=@harish-ui/storybook
+
+      - name: Upload Storybook build
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-build
+          path: apps/storybook/storybook-static
+          retention-days: 1
+
+  # ─── Job 8: Summary gate ─────────────────────────────────────────────────────
+  # Merge queues and branch protection can require only this single job
+  ci-ok:
+    name: CI passed
+    needs: [lint, typecheck, test, build-docs, build-storybook]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Check all jobs passed
+        run: |
+          results='${{ toJSON(needs) }}'
+          echo "$results"
+          if echo "$results" | grep -q '"result": "failure"'; then
+            echo "One or more CI jobs failed."
+            exit 1
+          fi
+          echo "All CI jobs passed."

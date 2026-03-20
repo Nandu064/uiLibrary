@@ -8,6 +8,7 @@ export async function generateStaticParams() {
   return [
     { slug: ["getting-started", "introduction"] },
     { slug: ["getting-started", "installation"] },
+    { slug: ["getting-started", "quick-start"] },
     { slug: ["getting-started", "theming"] },
     { slug: ["getting-started", "dark-mode"] },
   ];
@@ -19,6 +20,7 @@ export async function generateMetadata({ params }: PageProps) {
   const titles: Record<string, string> = {
     "getting-started/introduction": "Introduction",
     "getting-started/installation": "Installation",
+    "getting-started/quick-start": "Quick Start",
     "getting-started/theming": "Theming",
     "getting-started/dark-mode": "Dark Mode",
   };
@@ -34,6 +36,7 @@ export default async function DocsPage({ params }: PageProps) {
   const pages: Record<string, React.ReactNode> = {
     "getting-started/introduction": <IntroductionPage />,
     "getting-started/installation": <InstallationPage />,
+    "getting-started/quick-start": <QuickStartPage />,
     "getting-started/theming": <ThemingPage />,
     "getting-started/dark-mode": <DarkModePage />,
   };
@@ -245,6 +248,64 @@ function ThemingPage() {
 >
   <App />
 </ThemeProvider>`}</CodeBlock>
+    </>
+  );
+}
+
+function QuickStartPage() {
+  return (
+    <>
+      <H1>Quick Start</H1>
+      <Lead>Build your first UI in 5 minutes.</Lead>
+
+      <H2>1. Install</H2>
+      <CodeBlock>{`npm install @harish-ui/core`}</CodeBlock>
+
+      <H2>2. Add styles + provider</H2>
+      <CodeBlock>{`// main.tsx or layout.tsx
+import "@harish-ui/core/styles.css";
+import { ThemeProvider } from "@harish-ui/core";
+
+root.render(
+  <ThemeProvider defaultTheme="system">
+    <App />
+  </ThemeProvider>
+);`}</CodeBlock>
+
+      <H2>3. Use components</H2>
+      <CodeBlock>{`import { Button, Input, Card, CardBody, Alert } from "@harish-ui/core";
+
+export function LoginForm() {
+  return (
+    <Card style={{ maxWidth: 400, margin: "0 auto" }}>
+      <CardBody>
+        <Alert status="info" title="Demo mode" description="Use any credentials." />
+        <Input label="Email" type="email" placeholder="you@example.com" />
+        <Input label="Password" type="password" />
+        <Button fullWidth>Sign in</Button>
+      </CardBody>
+    </Card>
+  );
+}`}</CodeBlock>
+
+      <H2>4. Customize with CSS variables</H2>
+      <CodeBlock>{`/* Override the primary color globally */
+:root {
+  --ui-primary: #7c3aed;
+  --ui-primary-hover: #6d28d9;
+}
+
+/* Or scope it to a section */
+.my-section {
+  --ui-radius-md: 0px; /* square corners */
+}`}</CodeBlock>
+
+      <H2>What's next?</H2>
+      <ul style={{ paddingLeft: 20, color: "var(--ui-fg-subtle)", lineHeight: 2 }}>
+        <li>Browse the <strong style={{ color: "var(--ui-fg)" }}>Components</strong> section in the sidebar</li>
+        <li>Read the <strong style={{ color: "var(--ui-fg)" }}>Theming</strong> guide to customize tokens</li>
+        <li>Try the live <strong style={{ color: "var(--ui-fg)" }}>Playground</strong> on each component page</li>
+      </ul>
     </>
   );
 }

@@ -10,6 +10,11 @@ import {
   Stack,
   Divider,
   Spinner,
+  Alert,
+  Checkbox,
+  Switch,
+  Progress,
+  Skeleton,
 } from "@harish-ui/core";
 import type { PlaygroundControl } from "@harish-ui/core/docs-meta";
 import { PlaygroundPanel } from "./PlaygroundPanel";
@@ -26,6 +31,11 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   stack: Stack,
   divider: Divider,
   spinner: Spinner,
+  alert: Alert,
+  checkbox: Checkbox,
+  switch: Switch,
+  progress: Progress,
+  skeleton: Skeleton,
 };
 
 interface ComponentPlaygroundProps {

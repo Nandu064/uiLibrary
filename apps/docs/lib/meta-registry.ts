@@ -9,6 +9,11 @@ import {
   stackDocs,
   dividerDocs,
   spinnerDocs,
+  alertDocs,
+  checkboxDocs,
+  switchDocs,
+  progressDocs,
+  skeletonDocs,
 } from "@harish-ui/core/docs-meta";
 import type { DocsMeta } from "@harish-ui/core/docs-meta";
 
@@ -24,6 +29,11 @@ export const metaRegistry: Record<string, DocsMeta> = {
   stack: stackDocs,
   divider: dividerDocs,
   spinner: spinnerDocs,
+  alert: alertDocs,
+  checkbox: checkboxDocs,
+  switch: switchDocs,
+  progress: progressDocs,
+  skeleton: skeletonDocs,
 };
 
 export const componentSlugs = Object.keys(metaRegistry);
