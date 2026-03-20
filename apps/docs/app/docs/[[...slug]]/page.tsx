@@ -120,7 +120,7 @@ function IntroductionPage() {
         <li><strong style={{ color: "var(--ui-fg)" }}>CSS Variables theming</strong> — customize at global, component, or instance level</li>
         <li><strong style={{ color: "var(--ui-fg)" }}>Dark mode ready</strong> — one attribute switch, zero flash</li>
         <li><strong style={{ color: "var(--ui-fg)" }}>Accessible by default</strong> — ARIA roles, keyboard nav, focus management built in</li>
-        <li><strong style={{ color: "var(--ui-fg)" }}>RSC compatible</strong> — proper "use client" boundaries for Next.js App Router</li>
+        <li><strong style={{ color: "var(--ui-fg)" }}>RSC compatible</strong> — proper &quot;use client&quot; boundaries for Next.js App Router</li>
         <li><strong style={{ color: "var(--ui-fg)" }}>asChild pattern</strong> — render any component as any element without losing props</li>
         <li><strong style={{ color: "var(--ui-fg)" }}>Tree-shakeable</strong> — ESM + CJS, import only what you use</li>
       </ul>
@@ -300,7 +300,7 @@ export function LoginForm() {
   --ui-radius-md: 0px; /* square corners */
 }`}</CodeBlock>
 
-      <H2>What's next?</H2>
+      <H2>What&apos;s next?</H2>
       <ul style={{ paddingLeft: 20, color: "var(--ui-fg-subtle)", lineHeight: 2 }}>
         <li>Browse the <strong style={{ color: "var(--ui-fg)" }}>Components</strong> section in the sidebar</li>
         <li>Read the <strong style={{ color: "var(--ui-fg)" }}>Theming</strong> guide to customize tokens</li>
@@ -322,7 +322,7 @@ function DarkModePage() {
       <H2>How it works</H2>
       <P>
         The stylesheet includes both light and dark token sets. The <Code>ThemeProvider</Code> sets
-        <Code> data-theme="dark"</Code> on <Code>document.documentElement</Code> when dark mode is active.
+        <Code>{' data-theme="dark"'}</Code> on <Code>document.documentElement</Code> when dark mode is active.
         All CSS variables update automatically.
       </P>
 
@@ -348,7 +348,7 @@ export function App() {
 
       <H2>System preference</H2>
       <P>
-        Pass <Code>defaultTheme="system"</Code> to automatically follow the OS preference.
+        Pass <Code>{`defaultTheme="system"`}</Code> to automatically follow the OS preference.
         The theme updates in real-time if the user changes their system preference.
       </P>
 

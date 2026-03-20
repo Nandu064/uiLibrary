@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@harish-ui/core": "workspace:*",
@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
+    "@harish-ui/config-eslint": "workspace:*",
     "@storybook/addon-a11y": "^8.6.14",
     "@storybook/addon-docs": "^8.6.14",
     "@storybook/addon-essentials": "^8.6.14",
@@ -22,6 +23,7 @@
     "@storybook/react-vite": "^8.6.14",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
+    "eslint": "^9.27.0",
     "storybook": "^8.6.14",
     "typescript": "^5.8.3",
     "vite": "^5.0.0"
