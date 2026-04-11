@@ -4,9 +4,12 @@ import { cn } from "@harish-ui/utils";
 import type { AvatarProps, AvatarGroupProps } from "./Avatar.types";
 
 function getInitials(name: string): string {
-  const parts = name.trim().split(/\s+/);
-  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
-  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+  const trimmed = name.trim();
+  if (!trimmed) return "";
+  const parts = trimmed.split(/\s+/);
+  const first = parts[0]?.charAt(0) ?? "";
+  const last = parts[parts.length - 1]?.charAt(0) ?? "";
+  return (first + (parts.length > 1 ? last : "")).toUpperCase();
 }
 
 const PersonIcon = () => (
@@ -38,7 +41,7 @@ export const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
         )}
         {!showImg && showInitials && (
           <span className="ui-avatar__initials" aria-hidden="true">
-            {getInitials(name!)}
+            {getInitials(name)}
           </span>
         )}
         {!showImg && !showInitials && <PersonIcon />}

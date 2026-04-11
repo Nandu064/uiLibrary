@@ -1,7 +1,7 @@
 import type React from "react";
 export type TabsVariant = "line" | "enclosed" | "pills";
 export type TabsSize = "sm" | "md" | "lg";
-export interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   defaultIndex?: number;
   index?: number;
   onChange?: (index: number) => void;

@@ -4,7 +4,7 @@ import { cn } from "@harish-ui/utils";
 import { useControllableState } from "@harish-ui/hooks";
 import type { RadioGroupProps, RadioProps, RadioGroupSize } from "./RadioGroup.types";
 
-interface RGContextValue { value: string; onChange: (v: string) => void; name: string; disabled: boolean; size: RadioGroupSize; }
+interface RGContextValue { value: string | undefined; onChange: (v: string) => void; name: string; disabled: boolean; size: RadioGroupSize; }
 const RGContext = React.createContext<RGContextValue | null>(null);
 function useRGContext() {
   const ctx = React.useContext(RGContext);

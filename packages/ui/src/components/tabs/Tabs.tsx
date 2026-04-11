@@ -18,11 +18,12 @@ function useTabsContext() {
 
 export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
   ({ className, defaultIndex = 0, index, onChange, variant = "line", size = "md", children, ...props }, ref) => {
-    const [activeIndex, setActiveIndex] = useControllableState({
+    const [activeIndexRaw, setActiveIndex] = useControllableState<number>({
       prop: index,
       defaultProp: defaultIndex,
       onChange,
     });
+    const activeIndex = activeIndexRaw ?? 0;
     return (
       <TabsContext.Provider value={{ activeIndex, setActiveIndex }}>
         <div ref={ref} className={cn("ui-tabs", className)} data-variant={variant} data-size={size} {...props}>
@@ -56,11 +57,12 @@ export const Tab = React.forwardRef<HTMLButtonElement, TabProps & { _index?: num
       const tabs = Array.from(
         e.currentTarget.parentElement?.querySelectorAll<HTMLElement>('[role="tab"]') ?? []
       );
+      if (tabs.length === 0) return;
       const curr = tabs.indexOf(e.currentTarget);
-      if (e.key === "ArrowRight") { const n = (curr + 1) % tabs.length; tabs[n].focus(); setActiveIndex(n); e.preventDefault(); }
-      else if (e.key === "ArrowLeft") { const n = (curr - 1 + tabs.length) % tabs.length; tabs[n].focus(); setActiveIndex(n); e.preventDefault(); }
-      else if (e.key === "Home") { tabs[0].focus(); setActiveIndex(0); e.preventDefault(); }
-      else if (e.key === "End") { tabs[tabs.length - 1].focus(); setActiveIndex(tabs.length - 1); e.preventDefault(); }
+      if (e.key === "ArrowRight") { const n = (curr + 1) % tabs.length; tabs[n]?.focus(); setActiveIndex(n); e.preventDefault(); }
+      else if (e.key === "ArrowLeft") { const n = (curr - 1 + tabs.length) % tabs.length; tabs[n]?.focus(); setActiveIndex(n); e.preventDefault(); }
+      else if (e.key === "Home") { tabs[0]?.focus(); setActiveIndex(0); e.preventDefault(); }
+      else if (e.key === "End") { const last = tabs.length - 1; tabs[last]?.focus(); setActiveIndex(last); e.preventDefault(); }
     };
 
     return (
