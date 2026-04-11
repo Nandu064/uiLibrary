@@ -1,0 +1,1 @@
+import{r as e}from"./index-DyTKwKRb.js";function f({prop:o,defaultProp:l,onChange:r=()=>{}}){const[c,u]=e.useState(l),t=o!==void 0,a=t?o:c,n=e.useRef(r);n.current=r;const d=e.useCallback(s=>{t||u(s),n.current(s)},[t]);return[a,d]}export{f as u};

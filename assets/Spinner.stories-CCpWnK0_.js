@@ -1,0 +1,14 @@
+import{j as e}from"./jsx-runtime-BjG_zV1W.js";import{R as k}from"./index-DyTKwKRb.js";import{c as z}from"./slot-BZvB-ER0.js";import"./_commonjsHelpers-Cpj98o6Y.js";const n=k.forwardRef(({className:s,size:y="md",label:o="Loading...",showLabel:i=!1,color:v,style:h,...S},j)=>e.jsxs("span",{ref:j,className:z("ui-spinner",s),"data-size":y,role:"status","aria-label":i?void 0:o,...S,children:[e.jsxs("svg",{className:"ui-spinner__svg",viewBox:"0 0 24 24",fill:"none","aria-hidden":"true",style:{color:v,...h},children:[e.jsx("circle",{cx:"12",cy:"12",r:"10",stroke:"currentColor",strokeWidth:"2.5",strokeOpacity:"0.25"}),e.jsx("path",{d:"M12 2a10 10 0 0 1 10 10",stroke:"currentColor",strokeWidth:"2.5",strokeLinecap:"round"})]}),i?e.jsx("span",{className:"ui-spinner__label","aria-live":"polite",children:o}):e.jsx("span",{className:"ui-sr-only",children:o})]}));n.displayName="Spinner";n.__docgenInfo={description:"",methods:[],displayName:"Spinner",props:{size:{required:!1,tsType:{name:"union",raw:'"xs" | "sm" | "md" | "lg" | "xl"',elements:[{name:"literal",value:'"xs"'},{name:"literal",value:'"sm"'},{name:"literal",value:'"md"'},{name:"literal",value:'"lg"'},{name:"literal",value:'"xl"'}]},description:"",defaultValue:{value:'"md"',computed:!1}},label:{required:!1,tsType:{name:"string"},description:"Accessible label (always announced to screen readers)",defaultValue:{value:'"Loading..."',computed:!1}},showLabel:{required:!1,tsType:{name:"boolean"},description:"Show the label visually below the spinner",defaultValue:{value:"false",computed:!1}},color:{required:!1,tsType:{name:"string"},description:""}}};const q={title:"Feedback/Spinner",component:n,tags:["autodocs"],parameters:{layout:"centered"}},a={},r={render:()=>e.jsx("div",{style:{display:"flex",gap:16,alignItems:"center"},children:["xs","sm","md","lg","xl"].map(s=>e.jsx(n,{size:s},s))})},l={args:{color:"var(--ui-primary)",size:"lg"}};var t,c,d;a.parameters={...a.parameters,docs:{...(t=a.parameters)==null?void 0:t.docs,source:{originalSource:"{}",...(d=(c=a.parameters)==null?void 0:c.docs)==null?void 0:d.source}}};var p,m,u;r.parameters={...r.parameters,docs:{...(p=r.parameters)==null?void 0:p.docs,source:{originalSource:`{
+  render: () => <div style={{
+    display: "flex",
+    gap: 16,
+    alignItems: "center"
+  }}>
+      {(["xs", "sm", "md", "lg", "xl"] as const).map(s => <Spinner key={s} size={s} />)}
+    </div>
+}`,...(u=(m=r.parameters)==null?void 0:m.docs)==null?void 0:u.source}}};var f,x,g;l.parameters={...l.parameters,docs:{...(f=l.parameters)==null?void 0:f.docs,source:{originalSource:`{
+  args: {
+    color: "var(--ui-primary)",
+    size: "lg"
+  }
+}`,...(g=(x=l.parameters)==null?void 0:x.docs)==null?void 0:g.source}}};const C=["Default","Sizes","Colored"];export{l as Colored,a as Default,r as Sizes,C as __namedExportsOrder,q as default};
