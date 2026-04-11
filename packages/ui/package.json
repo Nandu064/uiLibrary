@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/harish/ui-library"
   },
-  "homepage": "https://harish-ui.dev",
+  "homepage": "https://ui-library-storybook-5luo.vercel.app",
   "keywords": ["react", "ui", "components", "design-system", "typescript"],
   "sideEffects": ["*.css", "dist/styles.css"],
   "main": "./dist/index.js",
