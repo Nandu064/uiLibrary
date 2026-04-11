@@ -18,6 +18,18 @@ const config: StorybookConfig = {
   },
   docs: {},
   viteFinal: async (config) => {
+    const stripUseClient = () => ({
+      name: "strip-use-client-directive",
+      enforce: "pre" as const,
+      transform(code: string, id: string) {
+        if (!id.endsWith(".ts") && !id.endsWith(".tsx") && !id.endsWith(".js") && !id.endsWith(".jsx")) return;
+        if (code.startsWith('"use client"') || code.startsWith("'use client'")) {
+          return { code: code.replace(/^["']use client["'];?\s*/i, "") };
+        }
+        return null;
+      },
+    });
+
     return mergeConfig(config, {
       resolve: {
         alias: {
@@ -26,6 +38,17 @@ const config: StorybookConfig = {
           "@harish-ui/tokens": path.resolve(__dirname, "../../../packages/tokens/src/index.ts"),
         },
       },
+      build: {
+        sourcemap: false, // avoid sourcemap lookup errors in Vercel logs
+      },
+      optimizeDeps: {
+        esbuildOptions: {
+          supported: {
+            "use-client-directive": true, // silence esbuild directive warning
+          },
+        },
+      },
+      plugins: [stripUseClient()],
     });
   },
 };
