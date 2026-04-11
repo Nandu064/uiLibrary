@@ -1,0 +1,5 @@
+{
+  "buildCommand": "pnpm --filter @harish-ui/storybook build",
+  "outputDirectory": "apps/storybook/storybook-static",
+  "installCommand": "pnpm install --frozen-lockfile"
+}
