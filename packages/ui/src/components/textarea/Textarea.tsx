@@ -33,6 +33,12 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       () => String(value ?? defaultValue ?? "").length
     );
 
+    // Keep character count in sync when the component is controlled and the parent updates `value`.
+    React.useEffect(() => {
+      if (value === undefined) return;
+      setCharCount(String(value).length);
+    }, [value]);
+
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setCharCount(e.target.value.length);
       onChange?.(e);

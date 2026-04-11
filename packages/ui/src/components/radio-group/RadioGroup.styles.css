@@ -1,0 +1,58 @@
+.ui-radio-group { display: flex; flex-direction: column; gap: 8px; }
+.ui-radio-group[data-direction="row"] { flex-direction: row; flex-wrap: wrap; gap: 16px; }
+
+.ui-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.ui-radio[data-disabled] { opacity: 0.5; cursor: not-allowed; }
+
+.ui-radio__control { position: relative; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+.ui-radio__input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: inherit;
+}
+
+.ui-radio__indicator {
+  --radio-size: 18px;
+  width: var(--radio-size);
+  height: var(--radio-size);
+  border-radius: 50%;
+  border: 2px solid var(--ui-border);
+  background-color: var(--ui-bg);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-radio__indicator::after {
+  content: "";
+  width: calc(var(--radio-size) * 0.45);
+  height: calc(var(--radio-size) * 0.45);
+  border-radius: 50%;
+  background-color: var(--ui-primary-fg);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.ui-radio[data-checked] .ui-radio__indicator { border-color: var(--ui-primary); background-color: var(--ui-primary); }
+.ui-radio[data-checked] .ui-radio__indicator::after { opacity: 1; transform: scale(1); }
+.ui-radio__input:focus-visible + .ui-radio__indicator { outline: 2px solid var(--ui-ring); outline-offset: 2px; }
+
+.ui-radio[data-size="sm"] .ui-radio__indicator { --radio-size: 14px; }
+.ui-radio[data-size="md"] .ui-radio__indicator { --radio-size: 18px; }
+.ui-radio[data-size="lg"] .ui-radio__indicator { --radio-size: 22px; }
+
+.ui-radio__label { font-size: var(--ui-text-sm); color: var(--ui-fg); line-height: 1.5; }
+.ui-radio[data-size="sm"] .ui-radio__label { font-size: var(--ui-text-xs); }
+.ui-radio[data-size="lg"] .ui-radio__label { font-size: var(--ui-text-md, 1rem); }

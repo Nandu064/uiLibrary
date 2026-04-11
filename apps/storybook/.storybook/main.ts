@@ -4,7 +4,8 @@ import path from "path";
 
 const config: StorybookConfig = {
   stories: [
-    "../../packages/ui/src/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+    // Use an absolute path so Storybook finds stories in the monorepo on Vercel
+    path.resolve(__dirname, "../../..", "packages/ui/src/**/*.stories.@(js|jsx|ts|tsx|mdx)"),
   ],
   addons: [
     "@storybook/addon-essentials",

@@ -38,17 +38,30 @@
 
 .ui-alert__close {
   flex-shrink: 0;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 2px;
+  padding: 4px;
+  margin: -2px -4px -2px 0;
   color: var(--ui-fg-muted);
   border-radius: var(--ui-radius-sm);
   line-height: 1;
-  font-size: 16px;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-.ui-alert__close:hover { color: var(--ui-fg); }
+.ui-alert__close:hover {
+  color: var(--ui-fg);
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.ui-alert__close:focus-visible {
+  outline: 2px solid var(--ui-ring);
+  outline-offset: 1px;
+}
 
 /* === Status === */
 .ui-alert[data-status="info"][data-variant="subtle"] {

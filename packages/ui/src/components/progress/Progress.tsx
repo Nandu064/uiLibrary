@@ -27,11 +27,15 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
       showValue = false,
       striped = false,
       animated = false,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledby,
       ...props
     },
     ref
   ) => {
-    const percentage = Math.min(100, Math.max(0, (value / max) * 100));
+    const safeMax = max > 0 ? max : 100;
+    const clampedValue = Math.min(Math.max(value, 0), safeMax);
+    const percentage = Math.min(100, Math.max(0, (clampedValue / safeMax) * 100));
 
     return (
       <div
@@ -54,8 +58,9 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
           role="progressbar"
           aria-valuenow={value}
           aria-valuemin={0}
-          aria-valuemax={max}
-          aria-label={label}
+          aria-valuemax={safeMax}
+          aria-label={ariaLabel ?? label ?? "Progress"}
+          aria-labelledby={ariaLabel ? undefined : ariaLabelledby}
         >
           <div
             className="ui-progress__fill"

@@ -1,0 +1,64 @@
+.ui-tabs { width: 100%; }
+
+.ui-tab-list {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 2px solid var(--ui-border);
+  margin-bottom: 16px;
+}
+
+.ui-tab {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: var(--ui-text-sm);
+  font-weight: 500;
+  color: var(--ui-fg-subtle);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  border-radius: var(--ui-radius-sm) var(--ui-radius-sm) 0 0;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.ui-tab:hover { color: var(--ui-fg); background-color: var(--ui-bg-subtle); }
+.ui-tab[data-active] { color: var(--ui-primary); border-bottom-color: var(--ui-primary); }
+.ui-tab:focus-visible { outline: 2px solid var(--ui-ring); outline-offset: 2px; border-radius: var(--ui-radius-sm); }
+.ui-tab[data-active]:focus-visible { outline-offset: -2px; }
+
+.ui-tabs[data-size="sm"] .ui-tab { padding: 6px 12px; font-size: var(--ui-text-xs); }
+.ui-tabs[data-size="lg"] .ui-tab { padding: 10px 20px; font-size: var(--ui-text-md, 1rem); }
+
+/* Enclosed */
+.ui-tabs[data-variant="enclosed"] .ui-tab-list {
+  background-color: var(--ui-bg-subtle);
+  border-radius: var(--ui-radius-md);
+  padding: 4px;
+  border-bottom: none;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+.ui-tabs[data-variant="enclosed"] .ui-tab {
+  border-bottom: none;
+  border-radius: var(--ui-radius-sm);
+  margin-bottom: 0;
+}
+.ui-tabs[data-variant="enclosed"] .ui-tab[data-active] {
+  background-color: var(--ui-bg);
+  color: var(--ui-fg);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  border-bottom: none;
+}
+
+/* Pills */
+.ui-tabs[data-variant="pills"] .ui-tab-list { border-bottom: none; gap: 6px; margin-bottom: 12px; }
+.ui-tabs[data-variant="pills"] .ui-tab { border-bottom: none; border-radius: var(--ui-radius-full); margin-bottom: 0; }
+.ui-tabs[data-variant="pills"] .ui-tab[data-active] { background-color: var(--ui-primary); color: var(--ui-primary-fg); border-bottom: none; }
+
+.ui-tab-panel { outline: none; }
+.ui-tab-panel:focus-visible { outline: 2px solid var(--ui-ring); outline-offset: 2px; border-radius: var(--ui-radius-sm); }

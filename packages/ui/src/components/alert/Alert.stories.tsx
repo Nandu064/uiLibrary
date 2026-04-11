@@ -11,6 +11,7 @@ const meta: Meta<typeof Alert> = {
     variant: { control: "select", options: ["subtle", "solid", "outline"] },
     title: { control: "text" },
     description: { control: "text" },
+    dismissible: { control: "boolean" },
   },
 };
 
@@ -18,37 +19,55 @@ export default meta;
 type Story = StoryObj<typeof Alert>;
 
 export const Default: Story = {
-  args: { title: "Info", description: "This is an informational alert.", status: "info" },
+  args: {
+    title: "Info",
+    description: "This is an informational alert.",
+    status: "info",
+    dismissible: true,
+  },
+};
+
+export const Dismissible: Story = {
+  args: {
+    status: "warning",
+    title: "Storage almost full",
+    description: "You are using 90% of your storage. Upgrade your plan to get more space.",
+    dismissible: true,
+  },
 };
 
 export const AllStatuses: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      <Alert status="info" title="Info" description="Your profile has been updated." />
-      <Alert status="success" title="Success" description="Payment processed successfully." />
-      <Alert status="warning" title="Warning" description="Your session expires in 5 minutes." />
-      <Alert status="error" title="Error" description="Something went wrong. Please try again." />
+      <Alert status="info" title="Info" description="Your profile has been updated." dismissible />
+      <Alert status="success" title="Success" description="Payment processed successfully." dismissible />
+      <Alert status="warning" title="Warning" description="Your session expires in 5 minutes." dismissible />
+      <Alert status="error" title="Error" description="Something went wrong. Please try again." dismissible />
     </div>
   ),
 };
 
-export const Solid: Story = {
+export const Variants: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      <Alert status="info" variant="solid" title="Info" description="Informational message." />
-      <Alert status="success" variant="solid" title="Success" description="Action completed." />
-      <Alert status="error" variant="solid" title="Error" description="Something went wrong." />
+      <Alert status="info" variant="subtle" title="Subtle" description="Default subtle variant." dismissible />
+      <Alert status="info" variant="outline" title="Outline" description="Outline border only." dismissible />
+      <Alert status="info" variant="solid" title="Solid" description="Full background fill." dismissible />
     </div>
   ),
 };
 
-export const Dismissible: Story = {
+export const TitleOnly: Story = {
+  args: { status: "success", title: "Changes saved successfully.", dismissible: true },
+};
+
+export const WithCallback: Story = {
   render: () => (
     <Alert
-      status="warning"
-      title="Storage almost full"
-      description="You are using 90% of your storage. Upgrade to get more."
-      onClose={() => alert("closed")}
+      status="error"
+      title="Failed to save"
+      description="Please check your connection and try again."
+      onClose={() => console.log("Alert closed")}
     />
   ),
 };

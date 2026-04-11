@@ -11,20 +11,20 @@
   "homepage": "https://harish-ui.dev",
   "keywords": ["react", "ui", "components", "design-system", "typescript"],
   "sideEffects": ["*.css", "dist/styles.css"],
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./styles.css": "./dist/styles.css",
     "./docs-meta": {
       "types": "./dist/docs-meta.d.ts",
-      "import": "./dist/docs-meta.js",
-      "require": "./dist/docs-meta.cjs"
+      "import": "./dist/docs-meta.mjs",
+      "require": "./dist/docs-meta.js"
     }
   },
   "files": ["dist", "README.md"],

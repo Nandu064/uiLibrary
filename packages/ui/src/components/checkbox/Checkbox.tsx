@@ -34,6 +34,14 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const autoId = React.useId();
     const checkboxId = id ?? autoId;
 
+    const internalRef = React.useRef<HTMLInputElement>(null);
+
+    React.useEffect(() => {
+      if (internalRef.current) {
+        internalRef.current.indeterminate = indeterminate;
+      }
+    }, [indeterminate]);
+
     return (
       <label
         className={cn("ui-checkbox", className)}
@@ -44,7 +52,14 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       >
         <span className="ui-checkbox__control">
           <input
-            ref={ref}
+            ref={(node) => {
+              internalRef.current = node;
+              if (typeof ref === "function") {
+                ref(node);
+              } else if (ref) {
+                (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
+              }
+            }}
             id={checkboxId}
             type="checkbox"
             className="ui-checkbox__input"

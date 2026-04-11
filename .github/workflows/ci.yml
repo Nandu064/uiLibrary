@@ -225,8 +225,8 @@ jobs:
         run: |
           results='${{ toJSON(needs) }}'
           echo "$results"
-          if echo "$results" | grep -q '"result": "failure"'; then
-            echo "One or more CI jobs failed."
+          if echo "$results" | grep -qE '"result": "(failure|skipped)"'; then
+            echo "One or more CI jobs failed or were skipped."
             exit 1
           fi
           echo "All CI jobs passed."
